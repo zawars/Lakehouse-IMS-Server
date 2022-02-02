@@ -19,7 +19,8 @@ module.exports = {
       type: 'string'
     },
     discount: {
-      type: 'number'
+      type: 'number',
+      defaultsTo: 50
     },
     quantity: {
       type: 'number'

@@ -18,6 +18,10 @@ module.exports = {
     discount: {
       type: 'number'
     },
+    type: {
+      type: 'string',
+      isIn: ['Cash', 'Credit']
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -28,7 +32,7 @@ module.exports = {
     customer: {
       model: 'customer'
     },
-    
+
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
@@ -41,4 +45,3 @@ module.exports = {
   },
 
 };
-
