@@ -49,4 +49,9 @@ module.exports.routes = {
   'POST /api/v1/user': 'UserController.create',
   'PATCH /api/v1/user/:id': 'UserController.update',
 
+  // Subject Controller Routes
+  'GET /api/v1/subject': 'SubjectController.index',
+
+  // Product Controller Routes
+  'GET /api/v1/product': 'ProductController.index',
 };
