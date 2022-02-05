@@ -51,7 +51,11 @@ module.exports.routes = {
 
   // Subject Controller Routes
   'GET /api/v1/subject': 'SubjectController.index',
+  'GET /api/v1/subject/search/:query': 'SubjectController.searchSubjects',
 
   // Product Controller Routes
   'GET /api/v1/product': 'ProductController.index',
+
+  // Course Controller Routes
+  'GET /api/v1/course/search/:query': 'CourseController.searchCourses',
 };

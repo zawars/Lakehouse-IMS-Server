@@ -20,5 +20,16 @@ module.exports = {
     res.ok({subjects, subjectsCount});
   },
 
+  searchSubjects: async (req, res) => {
+    let query = req.params.query;
+    
+    let subjects = await Subject.find({
+      name: {
+        'contains': query
+      }
+    }).select(['id', 'name']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+
+    res.ok(subjects);
+  },
 };
 
