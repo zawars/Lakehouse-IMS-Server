@@ -14,7 +14,7 @@ module.exports = {
       name: {
         'contains': query
       }
-    }).select(['id', 'name']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+    }).limit(10).meta({ makeLikeModifierCaseInsensitive: true }).populateAll();
 
     res.ok(courses);
   },

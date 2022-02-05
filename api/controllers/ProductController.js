@@ -20,5 +20,17 @@ module.exports = {
     res.ok({products, productsCount});
   },
 
+  searchProducts: async (req, res) => {
+    let query = req.params.query;
+    
+    let products = await Product.find({
+      name: {
+        'contains': query
+      }
+    }).select(['id', 'name', 'price', 'quantity', 'discount']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+
+    res.ok(products);
+  },
+
 };
 
