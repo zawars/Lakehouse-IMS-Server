@@ -30,8 +30,9 @@ module.exports.bootstrap = async function () {
 
   if (await Course.count() == 0) {
     await Course.createEach([
+      { name: 'Playgroup'},
       { name: 'Nursery'},
-      { name: 'Prep'},
+      { name: 'KG'},
       { name: 'One'},
       { name: 'Two'},
       { name: 'Three'},

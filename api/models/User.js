@@ -45,7 +45,8 @@ module.exports = {
       defaultsTo: false
     },
     role: {
-      type: 'string'
+      type: 'string',
+      isIn: ['admin', 'salesman']
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
