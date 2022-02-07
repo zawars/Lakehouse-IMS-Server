@@ -62,4 +62,7 @@ module.exports.routes = {
 
   // Customer Controller Routes
   'GET /api/v1/customer/search/:query': 'CustomerController.searchCustomer',
+
+  // Invoice Controller Routes
+  'POST /api/v1/invoice': 'InvoiceController.create',
 };

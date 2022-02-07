@@ -14,7 +14,7 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     uid: {
       type: 'number',
-      autoIncrement: true,
+      autoIncrement: true
     },
     total: {
       type: 'number'
@@ -25,6 +25,9 @@ module.exports = {
     type: {
       type: 'string',
       isIn: ['Cash', 'Credit']
+    },
+    products: {
+      type: 'json'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -40,12 +43,18 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    products: {
-      collection: 'product',
-      via: 'invoice',
-      through: 'productinvoice'
-    }
+    // products: {
+    //   collection: 'product',
+    //   via: 'invoice',
+    //   through: 'productinvoice'
+    // }
 
   },
+
+  beforeCreate: (values, cb) => {
+    EmailService.invoiceCounter++;
+    values.uid = EmailService.invoiceCounter;
+    cb();
+  }
 
 };

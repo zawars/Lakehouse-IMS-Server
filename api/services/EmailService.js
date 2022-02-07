@@ -15,6 +15,8 @@ let opts = {
 let transporter = nodemailer.createTransport(opts);
 
 module.exports = { 
+  invoiceCounter: 0,
+
   sendMail: async (options, done) => {
     transporter.sendMail({
       from: emailId,

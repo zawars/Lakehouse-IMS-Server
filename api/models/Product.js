@@ -42,11 +42,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    invoices: {
-      collection: 'invoice',
-      via: 'product',
-      through: 'productinvoice'
-    }
+    // invoices: {
+    //   collection: 'invoice',
+    //   via: 'product',
+    //   through: 'productinvoice'
+    // }
   },
 
 };

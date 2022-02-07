@@ -27,6 +27,10 @@ module.exports.bootstrap = async function () {
   // ]);
   // ```
 
+  if (await Invoice.count() > 0) {
+    let invoices = await Invoice.find();
+    EmailService.invoiceCounter = invoices[invoices.length - 1].uid;
+  }
 
   if (await Course.count() == 0) {
     await Course.createEach([
