@@ -61,6 +61,7 @@ module.exports.routes = {
   'GET /api/v1/course/search/:query': 'CourseController.searchCourses',
 
   // Customer Controller Routes
+  'GET /api/v1/customer': 'CustomerController.index',
   'GET /api/v1/customer/search/:query': 'CustomerController.searchCustomer',
 
   // Invoice Controller Routes

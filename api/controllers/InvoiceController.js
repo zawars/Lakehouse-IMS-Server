@@ -25,6 +25,14 @@ module.exports = {
       customer: customer.id
     }).fetch();
 
+    data.products.forEach(async product => {
+      await Product.update({
+        id: product.id
+      }).set({
+        quantity: product.totalQuantity - product.quantity 
+      });
+    });
+
     invoice = await Invoice.findOne({
       id: invoice.id
     }).populateAll();
