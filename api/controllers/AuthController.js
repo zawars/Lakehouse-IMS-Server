@@ -352,6 +352,7 @@ module.exports = {
 
   logout: async (req, res) => {
     let id = req.params.id;
+
     let user = await User.findOne({
       id
     });
@@ -364,6 +365,45 @@ module.exports = {
         message: "Logged out successfully."
       });
     });
+  },
+
+  authenticate: async (req, res) => {
+    let id = req.params.id;
+    let token = req.headers['authorization'].split(' ')[1];
+
+    let user = await User.findOne({
+      id
+    });
+
+    if (user) {
+      jwt.verify(token, sails.config.session.secret, (err, authData) => {
+        if (err) {
+          res.ok({
+            isAuthorized: false,
+            message: 'You are Unauthorized, Invalid request.'
+          });
+        } else {
+          RedisService.get(authData.id, (result) => { 
+            if (user.id == authData.id  && token == result) { 
+              res.ok({
+                isAuthorized: true,
+                user: user
+              });
+            } else {
+              res.ok({
+                isAuthorized: false,
+                message: 'You are Unauthorized, Invalid request.'
+              });
+            }
+          });
+        }
+      });
+    } else {
+      res.ok({
+        isAuthorized: false,
+        message: 'You are Unauthorized, Invalid request.'
+      });
+    }
   },
 
 };
