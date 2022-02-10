@@ -44,10 +44,15 @@ module.exports.routes = {
   'POST /api/v1/auth/verify': 'AuthController.verify',
   'POST /api/v1/auth/verify/resend': 'AuthController.resendToken',
   'GET /api/v1/auth/user/:id/logout': 'AuthController.logout',
+  'GET /api/v1/auth/user/:id/authenticate': 'AuthController.authenticate',
+  
 
   // User Controller Routes
+  'GET /api/v1/user': 'UserController.index',
   'POST /api/v1/user': 'UserController.create',
   'PATCH /api/v1/user/:id': 'UserController.update',
+  'GET /api/v1/user/:id/admin': 'UserController.getUserByAdmin',
+  'POST /api/v1/user/admin': 'UserController.createUserByAdmin',
 
   // Subject Controller Routes
   'GET /api/v1/subject': 'SubjectController.index',
@@ -61,6 +66,7 @@ module.exports.routes = {
   'GET /api/v1/course/search/:query': 'CourseController.searchCourses',
 
   // Customer Controller Routes
+  'GET /api/v1/customer': 'CustomerController.index',
   'GET /api/v1/customer/search/:query': 'CustomerController.searchCustomer',
 
   // Invoice Controller Routes
