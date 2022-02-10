@@ -32,20 +32,56 @@ module.exports.bootstrap = async function () {
     EmailService.invoiceCounter = invoices[invoices.length - 1].uid;
   }
 
+  if (await User.count() > 0) {
+    await User.create({
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "role": "admin",
+      "password": "123456",
+      "isVerified": true,
+      "address": "Lahore",
+      "phone": "123456789",
+      "dob": "1993/09/06"
+    });
+  }
+
   if (await Course.count() == 0) {
-    await Course.createEach([
-      { name: 'Playgroup'},
-      { name: 'Nursery'},
-      { name: 'KG'},
-      { name: 'One'},
-      { name: 'Two'},
-      { name: 'Three'},
-      { name: 'Four'},
-      { name: 'Five'},
-      { name: 'Six'},
-      { name: 'Seven'},
-      { name: 'Eight'},
-      { name: 'Ten'},
+    await Course.createEach([{
+        name: 'Playgroup'
+      },
+      {
+        name: 'Nursery'
+      },
+      {
+        name: 'KG'
+      },
+      {
+        name: 'One'
+      },
+      {
+        name: 'Two'
+      },
+      {
+        name: 'Three'
+      },
+      {
+        name: 'Four'
+      },
+      {
+        name: 'Five'
+      },
+      {
+        name: 'Six'
+      },
+      {
+        name: 'Seven'
+      },
+      {
+        name: 'Eight'
+      },
+      {
+        name: 'Ten'
+      },
     ]);
   }
 
