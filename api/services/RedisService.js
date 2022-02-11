@@ -25,13 +25,14 @@ module.exports = {
     });
   },
 
-  del: (key, done) => {
+  del: (key, done, error) => {
     client.del(key, function (err, response) {
       if (response == 1) {
         console.log("Deleted Successfully!");
         done(response);
       } else {
         console.log("Cannot delete");
+        error();
       }
     });
   },

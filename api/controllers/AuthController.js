@@ -358,10 +358,13 @@ module.exports = {
     });
 
     RedisService.del(id, () => {
-      console.log(`${user.email} logged out.`);
+      console.log(`${user ? user.email + ' ' : ''}logged out.`);
 
       res.ok({
-        email: user.email,
+        message: "Logged out successfully."
+      });
+    }, () => {
+      res.ok({
         message: "Logged out successfully."
       });
     });
