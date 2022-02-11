@@ -53,6 +53,7 @@ module.exports.routes = {
   'PATCH /api/v1/user/:id': 'UserController.update',
   'GET /api/v1/user/:id/admin': 'UserController.getUserByAdmin',
   'POST /api/v1/user/admin': 'UserController.createUserByAdmin',
+  'GET /api/v1/user/search/:query': 'UserController.searchUsers',
 
   // Subject Controller Routes
   'GET /api/v1/subject': 'SubjectController.index',
@@ -70,5 +71,7 @@ module.exports.routes = {
   'GET /api/v1/customer/search/:query': 'CustomerController.searchCustomer',
 
   // Invoice Controller Routes
+  'GET /api/v1/invoice': 'InvoiceController.index',
   'POST /api/v1/invoice': 'InvoiceController.create',
+  'PATCH /api/v1/invoice/filter': 'InvoiceController.invoicesFilter',
 };

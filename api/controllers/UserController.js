@@ -128,4 +128,23 @@ module.exports = {
       });
     }
   },
+
+  searchUsers: async (req, res) => {
+    let query = req.params.query;
+
+    let users = await User.find({
+      or: [{
+        name: {
+          'contains': query
+        }
+      },
+      {
+        email: {
+          'contains': query
+        }
+      }]
+    }).select(['id', 'name', 'email']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+
+    res.ok(users);
+  },
 };
