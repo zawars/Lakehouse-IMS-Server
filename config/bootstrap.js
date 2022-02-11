@@ -32,16 +32,16 @@ module.exports.bootstrap = async function () {
     EmailService.invoiceCounter = invoices[invoices.length - 1].uid;
   }
 
-  if (await User.count() > 0) {
+  if (await User.count() == 0) {
     await User.create({
-      "name": "Admin",
-      "email": "admin@gmail.com",
-      "role": "admin",
-      "password": "123456",
-      "isVerified": true,
-      "address": "Lahore",
-      "phone": "123456789",
-      "dob": "1993/09/06"
+      name: "Admin",
+      email: "admin@gmail.com",
+      role: "admin",
+      password: "123456",
+      isVerified: true,
+      address: "Lahore",
+      phone: "123456789",
+      dob: "1993/09/06"
     });
   }
 
