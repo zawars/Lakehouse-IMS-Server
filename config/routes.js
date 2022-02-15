@@ -62,6 +62,7 @@ module.exports.routes = {
   // Product Controller Routes
   'GET /api/v1/product': 'ProductController.index',
   'GET /api/v1/product/search/:query': 'ProductController.searchProducts',
+  'PATCH /api/v1/product/filter': 'ProductController.productsFilter',
 
   // Course Controller Routes
   'GET /api/v1/course/search/:query': 'CourseController.searchCourses',

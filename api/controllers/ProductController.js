@@ -32,5 +32,31 @@ module.exports = {
     res.ok(products);
   },
 
+  productsFilter: async (req, res) => {
+    let filters = req.body.filtersArray;
+    let filtersObj = {};
+    let productsCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+
+    filters.forEach(filter => {
+      let key = Object.keys(filter)[0];
+      filtersObj[key] = filter[key];
+    });
+
+    page == 0 ? productsCount = await Product.count({
+      where: filtersObj
+    }).meta({ enableExperimentalDeepTargets: true }) : null;
+
+    let products = await Product.find({
+      where: filtersObj
+    }).paginate(page, size).populateAll().meta({ enableExperimentalDeepTargets: true });
+
+    res.ok({ products, productsCount });
+  },
+
 };
 
