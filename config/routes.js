@@ -63,6 +63,7 @@ module.exports.routes = {
   'GET /api/v1/product': 'ProductController.index',
   'GET /api/v1/product/search/:query': 'ProductController.searchProducts',
   'PATCH /api/v1/product/filter': 'ProductController.productsFilter',
+  'GET /api/v1/product/quantity/:value': 'ProductController.getProductsCountByQuantity',
 
   // Course Controller Routes
   'GET /api/v1/course/search/:query': 'CourseController.searchCourses',
@@ -75,4 +76,8 @@ module.exports.routes = {
   'GET /api/v1/invoice': 'InvoiceController.index',
   'POST /api/v1/invoice': 'InvoiceController.create',
   'PATCH /api/v1/invoice/filter': 'InvoiceController.invoicesFilter',
+
+  // Publisher Controller Routes
+  'GET /api/v1/publisher': 'PublisherController.index',
+  'GET /api/v1/publisher/search/:query': 'PublisherController.searchPublishers',
 };

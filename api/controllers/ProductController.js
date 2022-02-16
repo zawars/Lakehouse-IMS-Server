@@ -27,7 +27,7 @@ module.exports = {
       name: {
         'contains': query
       }
-    }).select(['id', 'name', 'price', 'quantity', 'discount']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+    }).limit(10).meta({ makeLikeModifierCaseInsensitive: true }).populateAll();
 
     res.ok(products);
   },
@@ -57,6 +57,16 @@ module.exports = {
 
     res.ok({ products, productsCount });
   },
+
+  getProductsCountByQuantity: async (req, res) => { 
+    let counts = await Product.count({ 
+      quantity: {
+        '<=' : parseInt(req.params.value)
+      }
+    });
+
+    res.ok(counts);
+  }
 
 };
 
