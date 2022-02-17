@@ -53,7 +53,7 @@ module.exports = {
 
     let products = await Product.find({
       where: filtersObj
-    }).paginate(page, size).populateAll().meta({ enableExperimentalDeepTargets: true });
+    }).paginate(page, size).sort('createdAt DESC').populateAll().meta({ enableExperimentalDeepTargets: true });
 
     res.ok({ products, productsCount });
   },

@@ -26,6 +26,9 @@ module.exports = {
       type: 'string',
       isIn: ['Cash', 'Credit']
     },
+    status: {
+      type: 'string',
+    },
     products: {
       type: 'json'
     },

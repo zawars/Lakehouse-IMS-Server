@@ -76,6 +76,7 @@ module.exports.routes = {
   'GET /api/v1/invoice': 'InvoiceController.index',
   'POST /api/v1/invoice': 'InvoiceController.create',
   'PATCH /api/v1/invoice/filter': 'InvoiceController.invoicesFilter',
+  'GET /api/v1/invoice/reverse/:id': 'InvoiceController.reverseInvoice',
 
   // Publisher Controller Routes
   'GET /api/v1/publisher': 'PublisherController.index',

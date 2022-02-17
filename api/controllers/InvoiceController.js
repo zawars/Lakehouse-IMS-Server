@@ -38,12 +38,13 @@ module.exports = {
       customer: customer.id
     }).fetch();
 
-    data.products.forEach(async product => {
+    data.products.forEach(async (product, index) => {
+      index != data.products.length - 1 ?
       await Product.update({
         id: product.id
       }).set({
         quantity: product.totalQuantity - product.quantity 
-      });
+      }) : null;
     });
 
     invoice = await Invoice.findOne({
@@ -74,12 +75,44 @@ module.exports = {
 
     let invoices = await Invoice.find({
       where: filtersObj
-    }).paginate(page, size).populateAll().meta({ enableExperimentalDeepTargets: true });
+    }).paginate(page, size).sort('createdAt DESC').populateAll().meta({ enableExperimentalDeepTargets: true });
 
     // await Invoice.count().where(filtersObj);
     // let invoices = await Invoice.find({}).where(filtersObj).paginate(page, size).populateAll().meta({ enableExperimentalDeepTargets: true });
 
     res.ok({ invoices, invoicesCount });
+  },
+
+  reverseInvoice: async (req, res) => {
+    let invoice = await Invoice.findOne({
+      id: req.params.id
+    });
+
+    if (invoice && invoice.status != 'Reverse' && invoice.products) {
+      invoice.products.forEach(async (prod, index) => {
+        if (index != invoice.products.length - 1) {
+          let product = await Product.findOne({
+            id: prod.id
+          });
+
+          await Product.update({
+            id: product.id
+          }).set({
+            quantity: product.quantity + prod.quantity
+          });
+
+          await Invoice.update({
+            id: invoice.id
+          }).set({
+            status: 'Reverse'
+          });
+
+          invoice.status = 'Reverse';
+        }
+      });
+    }
+
+    res.ok(invoice);
   },
 };
 
