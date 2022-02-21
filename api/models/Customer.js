@@ -20,7 +20,10 @@ module.exports = {
     },
     phone: {
       type: 'string'
-    }
+    },
+    payable: {
+      type: 'number'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

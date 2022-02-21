@@ -87,4 +87,79 @@ module.exports.bootstrap = async function () {
 
   console.log('Seeds are ready to grow.');
 
+  // script for set customers payable
+
+  // let customers = await Customer.find();
+
+  // customers.forEach(async customer => {
+  //   let invoices = await Invoice.find({ 
+  //     customer: customer.id,
+  //     type: 'Credit'
+  //   });
+
+  //   let totalPayable = 0;
+    
+  //   invoices.forEach(invoice => {
+  //     totalPayable += invoice.total;
+  //   });
+
+  //   await Customer.update({
+  //     id: customer.id
+  //   }).set({
+  //     payable: totalPayable
+  //   });
+
+  //   console.log(customer.name, totalPayable);
+  // }); 
+
+  // script for set invoice products
+
+  // let invoices = await Invoice.find();
+
+  // invoices.forEach(async invoice => {
+  //   let sNo = invoice.products.length;
+  //   invoice.products[invoice.products.length - 1].sNo = sNo;
+  //   let netPrice = invoice.products[invoice.products.length - 1].netPrice;
+
+  //   for (let i=0; i<3; i++) {
+  //     let title = i == 0 ? 'Arrears' : i == 1 ? 'Net Payable' : 'Cash Paid';
+
+  //     sNo++;
+
+  //     invoice.products.push({
+  //       quantity: title,
+  //       discount: title,
+  //       netPrice: i == 2 ? netPrice : 0,
+  //       sNo: sNo 
+  //     });
+  //   }
+
+  //   await Invoice.update({
+  //     id: invoice.id
+  //   }).set({
+  //     products: invoice.products
+  //   });
+
+  //   console.log('invoice.products', invoice.products);
+  // });
+
+  // script for set invoice productsCollection
+
+  // let invoices = await Invoice.find();
+
+  // invoices.forEach(async invoice => { 
+  //   let productIds = [];
+
+  //   invoice.products.forEach(product => {
+  //     product.id ? productIds.push(product.id) : null;
+  //   });
+
+  //   await Invoice.update({
+  //     id: invoice.id
+  //   }).set({
+  //     productsCollection: productIds
+  //   });
+
+  //   console.log('productIds', productIds);
+  // });
 };

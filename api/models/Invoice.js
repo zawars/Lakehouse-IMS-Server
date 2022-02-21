@@ -19,7 +19,13 @@ module.exports = {
     total: {
       type: 'number'
     },
-    discount: {
+    cashPaid: {
+      type: 'number'
+    },
+    arrears: {
+      type: 'number'
+    },
+    netPayable: {
       type: 'number'
     },
     type: {
@@ -46,11 +52,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // products: {
-    //   collection: 'product',
-    //   via: 'invoice',
-    //   through: 'productinvoice'
-    // }
+    productsCollection: {
+      collection: 'product',
+      // via: 'invoice',
+      // through: 'productinvoice'
+    }
 
   },
 
