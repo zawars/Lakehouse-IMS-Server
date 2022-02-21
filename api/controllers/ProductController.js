@@ -27,10 +27,46 @@ module.exports = {
       name: {
         'contains': query
       }
-    }).select(['id', 'name', 'price', 'quantity', 'discount']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+    }).limit(10).meta({ makeLikeModifierCaseInsensitive: true }).populateAll();
 
     res.ok(products);
   },
+
+  productsFilter: async (req, res) => {
+    let filters = req.body.filtersArray;
+    let filtersObj = {};
+    let productsCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+
+    filters.forEach(filter => {
+      let key = Object.keys(filter)[0];
+      filtersObj[key] = filter[key];
+    });
+
+    page == 0 ? productsCount = await Product.count({
+      where: filtersObj
+    }).meta({ enableExperimentalDeepTargets: true }) : null;
+
+    let products = await Product.find({
+      where: filtersObj
+    }).paginate(page, size).sort('createdAt DESC').populateAll().meta({ enableExperimentalDeepTargets: true });
+
+    res.ok({ products, productsCount });
+  },
+
+  getProductsCountByQuantity: async (req, res) => { 
+    let counts = await Product.count({ 
+      quantity: {
+        '<=' : parseInt(req.params.value)
+      }
+    });
+
+    res.ok(counts);
+  }
 
 };
 

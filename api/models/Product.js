@@ -38,6 +38,9 @@ module.exports = {
     subject: {
       model: 'subject'
     },
+    publisher: {
+      model: 'publisher'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗

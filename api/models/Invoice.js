@@ -19,12 +19,21 @@ module.exports = {
     total: {
       type: 'number'
     },
-    discount: {
+    cashPaid: {
+      type: 'number'
+    },
+    arrears: {
+      type: 'number'
+    },
+    netPayable: {
       type: 'number'
     },
     type: {
       type: 'string',
       isIn: ['Cash', 'Credit']
+    },
+    status: {
+      type: 'string',
     },
     products: {
       type: 'json'
@@ -43,11 +52,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // products: {
-    //   collection: 'product',
-    //   via: 'invoice',
-    //   through: 'productinvoice'
-    // }
+    productsCollection: {
+      collection: 'product',
+      // via: 'invoice',
+      // through: 'productinvoice'
+    }
 
   },
 

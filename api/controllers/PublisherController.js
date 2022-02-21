@@ -1,5 +1,5 @@
 /**
- * CustomerController
+ * PublisherController
  *
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
@@ -8,28 +8,28 @@
 module.exports = {
   
   index: async (req, res) => {
-    let customersCount;
+    let publishersCount;
     let page = 0;
     let size = 10;
 
     req.query.page ? page = parseInt(req.query.page) : null;
     req.query.size ? size = parseInt(req.query.size) : null;
-    page == 0 ? customersCount = await Customer.count() : null;
+    page == 0 ? publishersCount = await Publisher.count() : null;
 
-    let customers = await Customer.find().paginate(page, size).sort('createdAt DESC').populateAll();
-    res.ok({customers, customersCount});
+    let publishers = await Publisher.find().paginate(page, size).sort('createdAt DESC').populateAll();
+    res.ok({ publishers, publishersCount });
   },
 
-  searchCustomer: async (req, res) => {
+  searchPublishers: async (req, res) => {
     let query = req.params.query;
     
-    let customers = await Customer.find({
+    let publishers = await Publisher.find({
       name: {
         'contains': query
       }
-    }).select(['id', 'name', 'payable']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+    }).select(['id', 'name']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
 
-    res.ok(customers);
+    res.ok(publishers);
   },
 
 };
