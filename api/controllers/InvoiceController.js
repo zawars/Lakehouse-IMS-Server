@@ -64,7 +64,7 @@ module.exports = {
 
     if (invoice && invoice.status != 'Reverse' && invoice.products) {
       invoice.products.forEach(async (prod, index) => {
-        if (index != invoice.products.length - 1) {
+        if (index < invoice.products.length - 4) {
           let product = await Product.findOne({
             id: prod.id
           });
@@ -74,16 +74,16 @@ module.exports = {
           }).set({
             quantity: product.quantity + prod.quantity
           });
-
-          await Invoice.update({
-            id: invoice.id
-          }).set({
-            status: 'Reverse'
-          });
-
-          invoice.status = 'Reverse';
         }
       });
+
+      await Invoice.update({
+        id: invoice.id
+      }).set({
+        status: 'Reverse'
+      });
+
+      invoice.status = 'Reverse';
     }
 
     res.ok(invoice);
@@ -117,12 +117,15 @@ const processInvoice = async (req, res, type) => {
 
   if (data.status == 'Billed') {
     data.products.forEach(async (product, index) => {
-      index < data.products.length - 4 ?
+      if (index < data.products.length - 4) {
+        let quantity; 
+        type == 'update' ? quantity = product.totalQuantity + (product.lastQuantity - product.quantity) : product.totalQuantity - product.quantity;
         await Product.update({
           id: product.id
         }).set({
-          quantity: product.totalQuantity - product.quantity
-        }) : null;
+          quantity: quantity
+        });
+      }
     });
 
     await Customer.update({
