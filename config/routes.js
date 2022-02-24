@@ -66,6 +66,7 @@ module.exports.routes = {
   'GET /api/v1/product/quantity/:value': 'ProductController.getProductsCountByQuantity',
 
   // Course Controller Routes
+  'GET /api/v1/course': 'CourseController.index',
   'GET /api/v1/course/search/:query': 'CourseController.searchCourses',
 
   // Customer Controller Routes
