@@ -27,7 +27,7 @@ module.exports = {
       name: {
         'contains': query
       }
-    }).select(['id', 'name', 'payable']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
+    }).select(['id', 'name', 'payable', 'percentage']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
 
     res.ok(customers);
   },
