@@ -101,6 +101,8 @@ module.exports = {
 
 const processInvoice = async (req, res, type) => {
   let data = req.body;
+  let customerProducts = data.customerProducts;
+  delete(data.customerProducts);
 
   let customer = await Customer.findOne({
     id: data.customer.id
@@ -140,7 +142,14 @@ const processInvoice = async (req, res, type) => {
     await Customer.update({
       id: customer.id
     }).set({
-      payable: data.netPayable
+      payable: data.netPayable,
+      products: customerProducts
+    });
+  } else {
+    await Customer.update({
+      id: customer.id
+    }).set({
+      products: customerProducts
     });
   }
 

@@ -27,6 +27,9 @@ module.exports = {
     percentage: {
       type: 'number'
     },
+    products: {
+      type: 'json'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
