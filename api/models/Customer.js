@@ -24,6 +24,12 @@ module.exports = {
     payable: {
       type: 'number'
     },
+    percentage: {
+      type: 'number'
+    },
+    products: {
+      type: 'json'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

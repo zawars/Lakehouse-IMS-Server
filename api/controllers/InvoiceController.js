@@ -58,9 +58,11 @@ module.exports = {
   },
 
   reverseInvoice: async (req, res) => {
+    let payable;
+
     let invoice = await Invoice.findOne({
       id: req.params.id
-    });
+    }).populateAll();
 
     if (invoice && invoice.status != 'Reverse' && invoice.products) {
       invoice.products.forEach(async (prod, index) => {
@@ -84,14 +86,23 @@ module.exports = {
       });
 
       invoice.status = 'Reverse';
+      payable = parseFloat((invoice.customer.payable - (invoice.products[invoice.products.length - 4].netPrice - invoice.products[invoice.products.length - 1].netPrice)).toFixed(2));
+
+      await Customer.update({
+        id: invoice.customer.id
+      }).set({
+        payable: payable
+      });
     }
 
-    res.ok(invoice);
+    res.ok({invoice, payable});
   },
 };
 
 const processInvoice = async (req, res, type) => {
   let data = req.body;
+  let customerProducts = data.customerProducts;
+  delete(data.customerProducts);
 
   let customer = await Customer.findOne({
     id: data.customer.id
@@ -119,7 +130,7 @@ const processInvoice = async (req, res, type) => {
     data.products.forEach(async (product, index) => {
       if (index < data.products.length - 4) {
         let quantity; 
-        type == 'update' ? quantity = product.totalQuantity + (product.lastQuantity - product.quantity) : product.totalQuantity - product.quantity;
+        quantity = product.lastQuantity ? product.totalQuantity + (product.lastQuantity - product.quantity) : product.totalQuantity - product.quantity;
         await Product.update({
           id: product.id
         }).set({
@@ -131,7 +142,14 @@ const processInvoice = async (req, res, type) => {
     await Customer.update({
       id: customer.id
     }).set({
-      payable: data.netPayable
+      payable: data.netPayable,
+      products: customerProducts
+    });
+  } else {
+    await Customer.update({
+      id: customer.id
+    }).set({
+      products: customerProducts
     });
   }
 
