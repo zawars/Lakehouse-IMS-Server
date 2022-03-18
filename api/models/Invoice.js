@@ -38,6 +38,16 @@ module.exports = {
     products: {
       type: 'json'
     },
+    isShipment: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    shipmentName: {
+      type: 'string',
+    },
+    shipmentDetail: {
+      type: 'string',
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
