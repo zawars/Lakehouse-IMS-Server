@@ -145,6 +145,12 @@ const processInvoice = async (req, res, type) => {
       payable: data.netPayable,
       products: customerProducts
     });
+
+    await Payment.create({
+      amount: data.cashPaid,
+      customer: customer.id,
+      invoice: invoice.id
+    });
   } else {
     await Customer.update({
       id: customer.id

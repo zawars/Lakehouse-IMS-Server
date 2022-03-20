@@ -1,5 +1,5 @@
 /**
- * Customer.js
+ * Payment.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,41 +12,23 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    name: {
-      type: 'string'
-    },
-    companyName: {
-      type: 'string'
-    },
-    phone: {
-      type: 'string'
-    },
-    payable: {
+    amount: {
       type: 'number'
-    },
-    percentage: {
-      type: 'number'
-    },
-    products: {
-      type: 'json'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
+    invoice: {
+      model: 'invoice'
+    },
+    customer: {
+      model: 'customer'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    invoices: {
-      collection: 'invoice',
-      via: 'customer'
-    },
-    payments: {
-      collection: 'payment',
-      via: 'customer'
-    }
 
   },
 
