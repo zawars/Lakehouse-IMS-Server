@@ -146,11 +146,13 @@ const processInvoice = async (req, res, type) => {
       products: customerProducts
     });
 
-    await Payment.create({
-      amount: data.cashPaid,
-      customer: customer.id,
-      invoice: invoice.id
-    });
+    if (data.cashPaid > 0) {
+      await Payment.create({
+        amount: data.cashPaid,
+        customer: customer.id,
+        invoice: invoice.id
+      });
+    }
   } else {
     await Customer.update({
       id: customer.id

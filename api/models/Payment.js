@@ -15,6 +15,9 @@ module.exports = {
     amount: {
       type: 'number'
     },
+    description: {
+      type: 'string'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
