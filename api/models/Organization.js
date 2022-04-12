@@ -1,5 +1,5 @@
 /**
- * Product.js
+ * Organization.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -15,44 +15,32 @@ module.exports = {
     name: {
       type: 'string'
     },
-    description: {
+    phone: {
       type: 'string'
     },
-    discount: {
-      type: 'number',
-      defaultsTo: 50
+    address: {
+      type: 'string'
     },
-    quantity: {
-      type: 'number'
+    isAccessRevoked: {
+      type: 'boolean',
+      defaultsTo: false
     },
-    price: {
-      type: 'number'
-    },
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    course: {
-      model: 'course'
-    },
-    subject: {
-      model: 'subject'
-    },
-    publisher: {
-      model: 'publisher'
-    },
-    organization: {
-      model: 'organization'
-    },
+
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // invoices: {
-    //   collection: 'invoice',
-    //   via: 'product',
-    //   through: 'productinvoice'
-    // }
+    users: {
+      collection: 'user',
+      via: 'organization'
+    },
+
   },
 
 };
+

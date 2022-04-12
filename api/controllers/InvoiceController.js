@@ -97,6 +97,24 @@ module.exports = {
 
     res.ok({invoice, payable});
   },
+
+  getInvoicesByOrganization: async (req, res) => {
+    let invoicesCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+    page == 0 ? invoicesCount = await Invoice.count({
+      organization: req.params.id
+    }) : null;
+
+    let invoices = await Invoice.find({
+      organization: req.params.id
+    }).paginate(page, size).sort('createdAt DESC').populateAll();
+
+    res.ok({invoices, invoicesCount});
+  },
 };
 
 const processInvoice = async (req, res, type) => {

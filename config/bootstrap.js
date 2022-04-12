@@ -32,60 +32,134 @@ module.exports.bootstrap = async function () {
     EmailService.invoiceCounter = invoices[invoices.length - 1].uid;
   }
 
-  if (await User.count() == 0) {
-    await User.create({
-      name: "Admin",
-      email: "admin@gmail.com",
-      role: "admin",
-      password: "123456",
-      isVerified: true,
-      address: "Lahore",
-      phone: "123456789",
-      dob: "1993/09/06"
-    });
-  }
+  // script for super admin creation
 
-  if (await Course.count() == 0) {
-    await Course.createEach([{
-        name: 'Playgroup'
-      },
-      {
-        name: 'Nursery'
-      },
-      {
-        name: 'KG'
-      },
-      {
-        name: 'One'
-      },
-      {
-        name: 'Two'
-      },
-      {
-        name: 'Three'
-      },
-      {
-        name: 'Four'
-      },
-      {
-        name: 'Five'
-      },
-      {
-        name: 'Six'
-      },
-      {
-        name: 'Seven'
-      },
-      {
-        name: 'Eight'
-      },
-      {
-        name: 'Ten'
-      },
-    ]);
-  }
+  // if (await User.count() == 0) {
+  //   await User.create({
+  //     name: "Super Admin",
+  //     email: "superadmin@gmail.com",
+  //     role: "superadmin",
+  //     password: "123456",
+  //     isVerified: true,
+  //     address: "Lahore",
+  //     phone: "123456789",
+  //     dob: "1993/09/06"
+  //   });
+  // }
+
+  // script set organization of Course
+
+  // let courses = await Course.find();
+
+  // courses.forEach(async course => {
+  //   await Course.update({
+  //     id: course.id
+  //   }).set({
+  //     organization: '624b220bcc2ad94d00a22178'
+  //   });
+  // });
+
+  // script set organization of Subject
+
+  // let subjects = await Subject.find();
+
+  // subjects.forEach(async subject => {
+  //   await Subject.update({
+  //     id: subject.id
+  //   }).set({
+  //     organization: '624b220bcc2ad94d00a22178'
+  //   });
+  // });
+
+  // script set organization of Publisher
+
+  // let publishers = await Publisher.find();
+
+  // publishers.forEach(async publisher => {
+  //   await Publisher.update({
+  //     id: publisher.id
+  //   }).set({
+  //     organization: '624b220bcc2ad94d00a22178'
+  //   });
+  // });
+
+  // script set organization of Customer
+
+  // let customers = await Customer.find();
+
+  // customers.forEach(async customer => {
+  //   await Customer.update({
+  //     id: customer.id
+  //   }).set({
+  //     organization: '624b220bcc2ad94d00a22178'
+  //   });
+  // });
+
+  // script set organization of Product
+
+  // let products = await Product.find();
+
+  // products.forEach(async product => {
+  //   await Product.update({
+  //     id: product.id
+  //   }).set({
+  //     organization: '624b220bcc2ad94d00a22178'
+  //   });
+  // });
+
+  // script set organization of Invoice
+
+  // let invoices = await Invoice.find();
+
+  // invoices.forEach(async invoice => {
+  //   await Invoice.update({
+  //     id: invoice.id
+  //   }).set({
+  //     organization: '624b220bcc2ad94d00a22178'
+  //   });
+  // });
 
   console.log('Seeds are ready to grow.');
+
+  // if (await Course.count() == 0) {
+  //   await Course.createEach([{
+  //       name: 'Playgroup'
+  //     },
+  //     {
+  //       name: 'Nursery'
+  //     },
+  //     {
+  //       name: 'KG'
+  //     },
+  //     {
+  //       name: 'One'
+  //     },
+  //     {
+  //       name: 'Two'
+  //     },
+  //     {
+  //       name: 'Three'
+  //     },
+  //     {
+  //       name: 'Four'
+  //     },
+  //     {
+  //       name: 'Five'
+  //     },
+  //     {
+  //       name: 'Six'
+  //     },
+  //     {
+  //       name: 'Seven'
+  //     },
+  //     {
+  //       name: 'Eight'
+  //     },
+  //     {
+  //       name: 'Ten'
+  //     },
+  //   ]);
+  // }
 
   // script for set customers payable
 

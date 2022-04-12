@@ -58,6 +58,9 @@ module.exports = {
     customer: {
       model: 'customer'
     },
+    organization: {
+      model: 'organization'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗

@@ -26,7 +26,8 @@ module.exports = {
     let products = await Product.find({
       name: {
         'contains': query
-      }
+      },
+      organization: req.params.id
     }).limit(10).meta({ makeLikeModifierCaseInsensitive: true }).populateAll();
 
     res.ok(products);
@@ -62,11 +63,30 @@ module.exports = {
     let counts = await Product.count({ 
       quantity: {
         '<=' : parseInt(req.params.value)
-      }
+      },
+      organization: req.params.id
     });
 
     res.ok(counts);
-  }
+  },
+
+  getProductsByOrganization: async (req, res) => {
+    let productsCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+    page == 0 ? productsCount = await Product.count({
+      organization: req.params.id
+    }) : null;
+
+    let products = await Product.find({
+      organization: req.params.id
+    }).paginate(page, size).sort('createdAt DESC').populateAll();
+
+    res.ok({products, productsCount});
+  },
 
 };
 
