@@ -26,10 +26,29 @@ module.exports = {
     let publishers = await Publisher.find({
       name: {
         'contains': query
-      }
+      },
+      organization: req.params.id
     }).select(['id', 'name']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
 
     res.ok(publishers);
+  },
+
+  getPublishersByOrganization: async (req, res) => {
+    let publishersCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+    page == 0 ? publishersCount = await Publisher.count({
+      organization: req.params.id
+    }) : null;
+
+    let publishers = await Publisher.find({
+      organization: req.params.id
+    }).paginate(page, size).sort('createdAt DESC').populateAll();
+
+    res.ok({publishers, publishersCount});
   },
 
 };

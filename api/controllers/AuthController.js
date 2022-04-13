@@ -16,39 +16,34 @@ module.exports = {
 
     let user = await User.findOne({
       email: data.email
-    }).decrypt();
+    }).decrypt().populate('organization');
 
     if (user) {
       if (user.isVerified) {
-        // if (err) {
-        //   res.ok({
-        //     message: "Invalid password."
-        //   });
-        // } else {
-        // if (result) {
-        if (user.password == data.password) {
-          jwt.sign(user, sails.config.session.secret, (err, token) => {
-            RedisService.set(user.id, token, () => {
-              console.log(`${user.email} logged in.`);
-              delete(user.password);
+        if (!user.organization || (user.organization && !user.organization.isAccessRevoked)) {
+          if (user.password == data.password) {
+            jwt.sign(user, sails.config.session.secret, (err, token) => {
+              RedisService.set(user.id, token, () => {
+                console.log(`${user.email} logged in.`);
+                delete (user.password);
 
-              res.ok({
-                token,
-                user,
-                message: "Logged in successfully."
+                res.ok({
+                  token,
+                  user,
+                  message: "Logged in successfully."
+                });
               });
             });
-          });
+          } else {
+            res.ok({
+              message: "Invalid password."
+            });
+          }
         } else {
           res.ok({
-            message: "Invalid password."
+            message: "User organization access is revoked."
           });
         }
-        // } else {
-        //   res.ok({
-        //     message: "Invalid password."
-        //   });
-        // }
       } else {
         res.ok({
           message: "User is not verified."
@@ -376,9 +371,9 @@ module.exports = {
 
     let user = await User.findOne({
       id
-    });
+    }).populate('organization');
 
-    if (user) {
+    if (user && user.isVerified && (!user.organization || (user.organization && !user.organization.isAccessRevoked))) {
       jwt.verify(token, sails.config.session.secret, (err, authData) => {
         if (err) {
           res.ok({

@@ -1,5 +1,5 @@
 /**
- * Product.js
+ * Payment.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,47 +12,28 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    name: {
-      type: 'string'
+    amount: {
+      type: 'number'
     },
     description: {
       type: 'string'
-    },
-    discount: {
-      type: 'number',
-      defaultsTo: 50
-    },
-    quantity: {
-      type: 'number'
-    },
-    price: {
-      type: 'number'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    course: {
-      model: 'course'
+    invoice: {
+      model: 'invoice'
     },
-    subject: {
-      model: 'subject'
-    },
-    publisher: {
-      model: 'publisher'
-    },
-    organization: {
-      model: 'organization'
+    customer: {
+      model: 'customer'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // invoices: {
-    //   collection: 'invoice',
-    //   via: 'product',
-    //   through: 'productinvoice'
-    // }
+
   },
 
 };
+

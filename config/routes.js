@@ -53,25 +53,31 @@ module.exports.routes = {
   'PATCH /api/v1/user/:id': 'UserController.update',
   'GET /api/v1/user/:id/admin': 'UserController.getUserByAdmin',
   'POST /api/v1/user/admin': 'UserController.createUserByAdmin',
-  'GET /api/v1/user/search/:query': 'UserController.searchUsers',
+  'GET /api/v1/user/organization/:id/search/:query': 'UserController.searchUsers',
+  'PATCH /api/v1/user/filter': 'UserController.usersFilter',
+  'GET /api/v1/user/organization/:id': 'UserController.getUsersByOrganization',
 
   // Subject Controller Routes
   'GET /api/v1/subject': 'SubjectController.index',
-  'GET /api/v1/subject/search/:query': 'SubjectController.searchSubjects',
+  'GET /api/v1/subject/organization/:id/search/:query': 'SubjectController.searchSubjects',
+  'GET /api/v1/subject/organization/:id': 'SubjectController.getSubjectsByOrganization',
 
   // Product Controller Routes
   'GET /api/v1/product': 'ProductController.index',
-  'GET /api/v1/product/search/:query': 'ProductController.searchProducts',
+  'GET /api/v1/product/organization/:id/search/:query': 'ProductController.searchProducts',
   'PATCH /api/v1/product/filter': 'ProductController.productsFilter',
-  'GET /api/v1/product/quantity/:value': 'ProductController.getProductsCountByQuantity',
+  'GET /api/v1/product/organization/:id/quantity/:value': 'ProductController.getProductsCountByQuantity',
+  'GET /api/v1/product/organization/:id': 'ProductController.getProductsByOrganization',
 
   // Course Controller Routes
   'GET /api/v1/course': 'CourseController.index',
-  'GET /api/v1/course/search/:query': 'CourseController.searchCourses',
+  'GET /api/v1/course/organization/:id/search/:query': 'CourseController.searchCourses',
+  'GET /api/v1/course/organization/:id': 'CourseController.getCoursesByOrganization',
 
   // Customer Controller Routes
   'GET /api/v1/customer': 'CustomerController.index',
-  'GET /api/v1/customer/search/:query': 'CustomerController.searchCustomer',
+  'GET /api/v1/customer/organization/:id/search/:query': 'CustomerController.searchCustomer',
+  'GET /api/v1/customer/organization/:id': 'CustomerController.getCustomersByOrganization',
 
   // Invoice Controller Routes
   'GET /api/v1/invoice': 'InvoiceController.index',
@@ -79,8 +85,14 @@ module.exports.routes = {
   'PATCH /api/v1/invoice/:id': 'InvoiceController.update',
   'PATCH /api/v1/invoice/filter': 'InvoiceController.invoicesFilter',
   'GET /api/v1/invoice/reverse/:id': 'InvoiceController.reverseInvoice',
+  'GET /api/v1/invoice/organization/:id': 'InvoiceController.getInvoicesByOrganization',
 
   // Publisher Controller Routes
   'GET /api/v1/publisher': 'PublisherController.index',
-  'GET /api/v1/publisher/search/:query': 'PublisherController.searchPublishers',
+  'GET /api/v1/publisher/organization/:id/search/:query': 'PublisherController.searchPublishers',
+  'GET /api/v1/publisher/organization/:id': 'PublisherController.getPublishersByOrganization',
+
+  // Organization Controller Routes
+  'GET /api/v1/organization': 'OrganizationController.index',
+  'GET /api/v1/organization/search/:query': 'OrganizationController.searchOrganizations',
 };

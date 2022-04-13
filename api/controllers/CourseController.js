@@ -26,10 +26,29 @@ module.exports = {
     let courses = await Course.find({
       name: {
         'contains': query
-      }
+      },
+      organization: req.params.id
     }).limit(10).meta({ makeLikeModifierCaseInsensitive: true }).populateAll();
 
     res.ok(courses);
+  },
+
+  getCoursesByOrganization: async (req, res) => {
+    let coursesCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+    page == 0 ? coursesCount = await Course.count({
+      organization: req.params.id
+    }) : null;
+
+    let courses = await Course.find({
+      organization: req.params.id
+    }).paginate(page, size).sort('createdAt DESC').populateAll();
+
+    res.ok({courses, coursesCount});
   },
 
 };

@@ -97,6 +97,24 @@ module.exports = {
 
     res.ok({invoice, payable});
   },
+
+  getInvoicesByOrganization: async (req, res) => {
+    let invoicesCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+    page == 0 ? invoicesCount = await Invoice.count({
+      organization: req.params.id
+    }) : null;
+
+    let invoices = await Invoice.find({
+      organization: req.params.id
+    }).paginate(page, size).sort('createdAt DESC').populateAll();
+
+    res.ok({invoices, invoicesCount});
+  },
 };
 
 const processInvoice = async (req, res, type) => {
@@ -145,6 +163,14 @@ const processInvoice = async (req, res, type) => {
       payable: data.netPayable,
       products: customerProducts
     });
+
+    if (data.cashPaid > 0) {
+      await Payment.create({
+        amount: data.cashPaid,
+        customer: customer.id,
+        invoice: invoice.id
+      });
+    }
   } else {
     await Customer.update({
       id: customer.id

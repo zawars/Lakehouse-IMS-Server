@@ -104,7 +104,7 @@ module.exports = {
   getUserByAdmin: async (req, res) => {
     let user = await User.findOne({
       id: req.params.id
-    }).decrypt();
+    }).decrypt().populate('organization');
 
     res.ok(user);
   },
@@ -142,9 +142,54 @@ module.exports = {
         email: {
           'contains': query
         }
-      }]
+      }],
+      organization: req.params.id
     }).select(['id', 'name', 'email']).limit(10).meta({ makeLikeModifierCaseInsensitive: true });
 
     res.ok(users);
+  },
+
+  usersFilter: async (req, res) => {
+    let filters = req.body.filtersArray;
+    let filtersObj = {};
+    let usersCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+
+    filters.forEach(filter => {
+      let key = Object.keys(filter)[0];
+      filtersObj[key] = filter[key];
+    });
+
+    page == 0 ? usersCount = await User.count({
+      where: filtersObj
+    }).meta({ enableExperimentalDeepTargets: true }) : null;
+
+    let users = await User.find({
+      where: filtersObj
+    }).paginate(page, size).sort('createdAt DESC').populateAll().meta({ enableExperimentalDeepTargets: true });
+
+    res.ok({ users, usersCount });
+  },
+
+  getUsersByOrganization: async (req, res) => {
+    let usersCount;
+    let page = 0;
+    let size = 10;
+
+    req.query.page ? page = parseInt(req.query.page) : null;
+    req.query.size ? size = parseInt(req.query.size) : null;
+    page == 0 ? usersCount = await User.count({
+      organization: req.params.id
+    }) : null;
+
+    let users = await User.find({
+      organization: req.params.id
+    }).paginate(page, size).sort('createdAt DESC').populateAll();
+    
+    res.ok({users, usersCount});
   },
 };
