@@ -49,6 +49,7 @@ module.exports = {
     default: {
       adapter: 'sails-mongo',
       url: 'mongodb://localhost:27017/lakehouse-ims',
+      // url: 'mongodb+srv://zawars:WTsAiw64GnQeT8N@cluster0.zmfqg.mongodb.net/lakehouse-ims?retryWrites=true&w=majority',
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
       //  ||   sensitive credentials like `url` using an environment variable.

@@ -49,8 +49,8 @@ module.exports.datastores = {
     *                                                                          *
     ***************************************************************************/
     adapter: 'sails-mongo',
-    // url: 'mongodb://localhost:27017/lakehouse-ims',
-    url: 'mongodb+srv://zawars:WTsAiw64GnQeT8N@cluster0.zmfqg.mongodb.net/lakehouse-ims?retryWrites=true&w=majority',
+    url: 'mongodb://localhost:27017/lakehouse-ims',
+    // url: 'mongodb+srv://zawars:WTsAiw64GnQeT8N@cluster0.zmfqg.mongodb.net/lakehouse-ims?retryWrites=true&w=majority',
     // url: 'mongodb://zawars:WTsAiw64GnQeT8N@cluster0-shard-00-00.zmfqg.mongodb.net:27017,cluster0-shard-00-01.zmfqg.mongodb.net:27017,cluster0-shard-00-02.zmfqg.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-o332kv-shard-0&authSource=admin&retryWrites=true&w=majority',
 
   },
