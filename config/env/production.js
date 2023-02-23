@@ -19,6 +19,8 @@
  * https://sailsjs.com/docs/concepts/deployment
  */
 
+const fs = require('fs');
+
 module.exports = {
 
 
@@ -368,7 +370,10 @@ module.exports = {
    * > https://sailsjs.com/config/*#?sailsconfigssl                          *
    *                                                                         *
    **************************************************************************/
-  // ssl: undefined,
+  ssl: {
+    key: fs.readFileSync('key.pem', 'utf8'),
+    cert: fs.readFileSync('cert.pem', 'utf8')
+  },
 
 
 
